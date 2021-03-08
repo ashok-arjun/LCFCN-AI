@@ -100,6 +100,11 @@ hj.get_dashboard(rm, vars(), wide_display=True)
 This script outputs the following dashboard
 ![](results/dashboard_trancos.png)
 
+
+## Pretrained models
+
+Shanghai - FCN8 - https://drive.google.com/file/d/1N75fun1I1XWh1LuKmi60QXF2SgCPLLLQ/view
+
 ## Citation 
 If you find the code useful for your research, please cite:
 
