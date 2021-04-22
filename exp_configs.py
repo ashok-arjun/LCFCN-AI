@@ -4,7 +4,7 @@ EXP_GROUPS = {}
 
 EXP_GROUPS['shanghai'] =  {"dataset": {'name':'shanghai', 
                             'transform':'rgb_normalize'},
-         "model": {'name':'lcfcn','base':"fcn8_vgg16"},
+         "model": {'name':'lcfcn','base':"fcn8_resnet"},
          "batch_size": [1],
          "max_epoch": [100],
          'dataset_size': {'train':'all', 'val':'all'},
