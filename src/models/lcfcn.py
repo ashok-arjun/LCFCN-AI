@@ -84,6 +84,32 @@ class LCFCN(torch.nn.Module):
         val_dict = {'val_mae':val_mae, 'val_score':-val_mae}
         return val_dict
 
+    @torch.no_grad()
+    def test_on_loader(self, test_loader, savedir_images=None):
+        self.eval()
+
+        n_batches = len(test_loader)
+        val_meter = metrics.Meter()
+        pbar = tqdm.tqdm(total=n_batches)
+        for i, batch in enumerate(tqdm.tqdm(test_loader)):
+            score_dict = self.val_on_batch(batch)
+            val_meter.add(score_dict['miscounts'], batch['images'].shape[0])
+            
+            pbar.update(1)
+
+            if savedir_images:
+                os.makedirs(savedir_images, exist_ok=True)
+                self.vis_on_batch(batch, savedir_image=os.path.join(
+                    savedir_images, "%d.jpg" % i))
+                
+                pbar.set_description("Validating. MAE: %.4f" % val_meter.get_avg_score())
+
+        pbar.close()
+        val_mae = val_meter.get_avg_score()
+        val_dict = {'val_mae':val_mae, 'val_score':-val_mae}
+        return val_dict
+    
+    
     def train_on_batch(self, batch, **extras):
         self.opt.zero_grad()
         self.train()

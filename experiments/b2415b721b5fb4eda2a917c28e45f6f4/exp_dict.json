@@ -1,0 +1,19 @@
+{
+    "batch_size": 1,
+    "dataset": {
+        "name": "shanghai",
+        "transform": "rgb_normalize"
+    },
+    "dataset_size": {
+        "test": "all",
+        "train": "all",
+        "val": "all"
+    },
+    "lr": 1e-05,
+    "max_epoch": 100,
+    "model": {
+        "base": "fcn8_resnet",
+        "name": "lcfcn"
+    },
+    "optimizer": "adam"
+}
